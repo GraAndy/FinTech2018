@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FinTech.Models.Employee>
+
+@{
+    ViewBag.Title = "Персонал заведения";
+}
+
+<h2>Персонал заведения</h2>
+
+<p>
+    @using (Html.BeginForm("Organization", "Employees"))
+    {
+        <input type="text" class="form-control" name="EmployesId" id="EmployesId" placeholder="Код" />
+        <input type="submit" value="Добавить" class="btn btn-default" />
+        @Html.AntiForgeryToken()
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patronymic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Wallet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patronymic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Wallet)
+        </td>
+        <td>
+            @Html.ActionLink("Статистика", "/Employees/Groups") |
+            <a href="/Cards/Employees?EmployeesID=@Html.Raw(item.Id )">Карты</a> |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

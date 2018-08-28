@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FinTech.Models.Clients>
+
+@{
+    ViewBag.Title = "Клиенты";
+}
+
+<h2>Клиенты</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Сумма чаевых
+        </th>
+        <th>
+            Кол-во оплат
+        </th>
+        <th>
+            Баллы
+        </th>
+        <th></th>
+    </tr>
+@{ 
+    int count = 0;
+}
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.Label(item.Surname) @Html.Label(item.Name) @Html.Label(item.Patronymic)
+        </td>
+        <td>
+            @Html.Label( ((List<String>)ViewData["summ"])[count])
+        </td>
+        <td>
+            @Html.Label(((List<String>)ViewData["count"])[count])
+        </td>
+        <td>
+            @Html.Label(item.Points.ToString())
+        </td>
+        <td>
+            @{
+                count += 1;
+            }
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,28 @@
+﻿
+info@fintech.ru / Qq65*QqQq
+
+API (without auth)
+
+1. Employee 
+
+- Create new Employee (/Employees/Create)
+REQUEST -> POST {Name,Surname,Patronymic}
+RESPONSE -> {Status = {"Success", "Error"}, ID, Wallet} 
+
+- Edit Employee (/Employees/Edit)
+REQUEST -> POST {ID,Name,Surname,Patronymic}
+RESPONSE -> {Status = {"Success", "Error"}}
+
+2. Transactions
+- Create transaction (/Transactions/Create)
+REQUEST -> POST {clientID,employeeID,sum}
+RESPONSE -> {Status = {"Success", "Error"}}
+
+
+
+TEST CARDS:
+1.	AAA1	PASS1	USED
+2.	AAA2	PASS2	USED
+3.	AAA3	PASS3	USED
+4.	AAA4	PASS4	NOTUSED
+5.	AAA5	PASS5	NOTUSED

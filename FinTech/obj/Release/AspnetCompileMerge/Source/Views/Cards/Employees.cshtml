@@ -1,0 +1,55 @@
+﻿@model IEnumerable<FinTech.Models.Card>
+
+@{
+    ViewBag.Title = "Списко карт работника";
+}
+
+<h2>Список карт работника @Html.Raw(((FinTech.Models.Employee)ViewData["Employee"]).Surname)</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("EmployeeID", ((FinTech.Models.Employee)ViewData["Employee"]).Id)
+
+    <div class="form-group">
+        @Html.Label("", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @foreach (var item in (List<FinTech.Models.Card>)ViewData["Cards"])
+            {
+
+                if (item.employee != null)
+                {
+                    if (item.employee.Id == ((FinTech.Models.Employee)ViewData["Employee"]).Id)
+                    {
+                        <input type="checkbox"
+                               name="Cards"
+                               checked="checked"
+                               value="@item.Id" id="@item.Id" />
+                        <label for="@item.Id">@item.code</label><br />
+                    }
+                    else
+                    {
+                        <input type="checkbox"
+                               name="Cards"
+                               value="@item.Id" id="@item.Id" />
+                        <label for="@item.Id">@item.code</label><br />
+                    }
+                }
+                else
+                {
+                    <input type="checkbox"
+                           name="Cards"
+                           value="@item.Id" id="@item.Id" />
+                    <label for="@item.Id">@item.code</label><br />
+                }
+
+
+            }
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Сохранить" class="btn btn-default" />
+        </div>
+    </div>
+}
